@@ -36,4 +36,5 @@ movement time = rolling time theDots theMass theStartingVelocity theForceApplied
 rolling time dots mass startingVelocity forceApplied incomingCollision | incomingCollision dots == true  = collide dots mass startingVelocity forceApplied
                                                                        otherwise doTheMovement
 
-doTheMovement time dots sumOfStartingVelocity sumOfAcceleration | dots != [] = theLinearMovement head dots 
+movingASingleCube time dots sumOfStartingVelocity sumOfAcceleration | dots != [] = [theLinearMovement head dots sumOfStartingVelocity sumOfAcceleration, movingASingleCube time tail dots sumOfStartingVelocity sumOfAcceleration]
+                                                                    otherwise []
