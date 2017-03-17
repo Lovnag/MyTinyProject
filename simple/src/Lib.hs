@@ -34,7 +34,11 @@ timePassing time
 movement time = rolling time theDots theMass theStartingVelocity theForceApplied impedingCollision
 
 rolling time dots mass startingVelocity forceApplied incomingCollision | incomingCollision dots == true  = collide dots mass startingVelocity forceApplied
-                                                                       otherwise doTheMovement
+                                                                       otherwise doTheMovement dots startingVelocity (calcTheAcceleration forceApplied mass)
+
+doTheMovement dots velocityList accelerationList | dots != [] = [movingASingleCube head dots head velocityList accelerationList, doTheMovement tail dots tail velocityList tail accelerationList]
+                                                  otherwise []
+
 
 movingASingleCube time dots sumOfStartingVelocity sumOfAcceleration | dots != [] = [theLinearMovement head dots sumOfStartingVelocity sumOfAcceleration, movingASingleCube time tail dots sumOfStartingVelocity sumOfAcceleration]
                                                                     otherwise []
